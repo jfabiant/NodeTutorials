@@ -18,6 +18,7 @@ console.log('Server running in port 9000');
 
 /*Example #3*/
 
+/*
 const express = require('express');
 var app = express();
 
@@ -27,8 +28,28 @@ app.get('/', function(request, response){
 });
 
 app.listen(process.env.PORT || 9000);
+*/
+
+/*Example #4*/
+
+const express = require ('express');
+const app = express();
+
+const bodyParser = require('body-parser');
 
 
+app.get('/', function(req, res){
+    res.send('Hola mundo con express');
+});
+app.get('/inicio', (req, res) => {
+    res.send('Hola soy el inicio');
+});
+
+const server = app.listen(9000, function(){
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log('Servidor corriendo en el puerto '+port);
+});
 
 
 
