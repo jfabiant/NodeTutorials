@@ -32,25 +32,36 @@ app.listen(process.env.PORT || 9000);
 
 /*Example #4*/
 
-const express = require ('express');
-const app = express();
+const express = require ('express')
+const app = express()
 
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser')
+const port = process.env.PORT || 9000
 
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+app.set('view engine', 'ejs')
 
-app.get('/', function(req, res){
-    res.send('Hola mundo con express');
+app.get('/', (req, res)=>{
+    usuarios = {
+        "jfabiant":
+        {
+            "nombres":"John",
+            "edad":18,
+            "lenguajes":[ "java", "js", "python" ]
+        },
+        "jmaria":{
+            "nombres":"Juana",
+            "edad":30,
+            "lenguajes":[ "kotlin", "c++", "c#" ]
+        }
+    }
+    res.render('index', usuarios)
 });
-app.get('/inicio', (req, res) => {
-    res.send('Hola soy el inicio');
-});
 
-const server = app.listen(9000, function(){
-    var host = server.address().address;
-    var port = server.address().port;
-    console.log('Servidor corriendo en el puerto '+port);
+app.listen(port, () =>{
+    console.log('Server running in port http://localhost:'+port)
 });
-
 
 
 
