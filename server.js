@@ -1,6 +1,6 @@
 
 /*Example #1 with console*/
-console.log("Hello world by jfabiant")
+//console.log("Hello world by jfabiant")
 
 /*
 Example #2
@@ -34,30 +34,15 @@ app.listen(process.env.PORT || 9000);
 
 const express = require ('express')
 const app = express()
-
+const routes = require('./routes/routes')
 const bodyParser = require('body-parser')
 const port = process.env.PORT || 9000
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use('/', routes)
 app.set('view engine', 'ejs')
-
-app.get('/', (req, res)=>{
-    usuarios = {
-        "jfabiant":
-        {
-            "nombres":"John",
-            "edad":18,
-            "lenguajes":[ "java", "js", "python" ]
-        },
-        "jmaria":{
-            "nombres":"Juana",
-            "edad":30,
-            "lenguajes":[ "kotlin", "c++", "c#" ]
-        }
-    }
-    res.render('index', usuarios)
-});
+app.use(express.static(__dirname + '/public'));
 
 app.listen(port, () =>{
     console.log('Server running in port http://localhost:'+port)
